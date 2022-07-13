@@ -90,5 +90,20 @@ namespace AudioVisualization.Test
             }
         }
 
+        [TestMethod]
+        public void TestCapacity()
+        {
+            var undoRedoStack = new DropOutStack<int>(5);
+            for (var i = 0; i < 10; i++)
+            {
+                undoRedoStack.Push(i + 1);
+            }
+
+            Assert.AreEqual(10, undoRedoStack.Pop());
+            Assert.AreEqual(9, undoRedoStack.Pop());
+            Assert.AreEqual(8, undoRedoStack.Pop());
+            Assert.AreEqual(7, undoRedoStack.Pop());
+            Assert.AreEqual(6, undoRedoStack.Pop());
+        }
     }
 }

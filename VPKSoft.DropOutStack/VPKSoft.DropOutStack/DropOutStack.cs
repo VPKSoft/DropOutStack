@@ -39,7 +39,7 @@ namespace VPKSoft.DropOutStack
     /// <seealso cref="System.Collections.Generic.IEnumerable{T}" />
     /// <seealso cref="System.Collections.Generic.IEnumerator{T}" />
     [Serializable]
-    public class DropOutStack<T>: IEnumerable<T>, IEnumerator<T>
+    public class DropOutStack<T> : IEnumerable<T>, IEnumerator<T>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DropOutStack{T}"/> class.
@@ -75,7 +75,7 @@ namespace VPKSoft.DropOutStack
             {
                 if (index < 0 || index >= Count)
                 {
-                   // throw new ArgumentOutOfRangeException(nameof(index), @"The index is out of range.");
+                    // throw new ArgumentOutOfRangeException(nameof(index), @"The index is out of range.");
                 }
 
                 return items[(Count - index + cursor - 1) % Count];
@@ -149,12 +149,8 @@ namespace VPKSoft.DropOutStack
             {
                 Count--;
 
-                var result = items[--cursor];
-
-                if (cursor < 1)
-                {
-                    cursor = capacity;
-                }
+                cursor = (items.Length + cursor - 1) % items.Length;
+                var result = items[cursor];
 
                 return result;
             }
@@ -170,7 +166,7 @@ namespace VPKSoft.DropOutStack
         {
             //Buffer.BlockCopy(items, 0, items, 1, capacity - 1);
 
-            items[cursor++] = item;
+            items[cursor] = item;
             Count++;
 
             if (Count > capacity)
@@ -178,7 +174,7 @@ namespace VPKSoft.DropOutStack
                 Count = capacity;
             }
 
-            cursor %= capacity;
+            cursor = (cursor + 1) % items.Length;
         }
 
         /// <summary>
@@ -195,7 +191,7 @@ namespace VPKSoft.DropOutStack
                 return result;
             }
 
-            for (int i = 0; i < Count; i++)// E, D, C, B, A, 9, 8, 7, 6, 5
+            for (int i = 0; i < Count; i++)
             {
                 result[i] = items[(Count - i + cursor - 1) % Count];
             }
@@ -244,7 +240,7 @@ namespace VPKSoft.DropOutStack
             {
                 return;
             }
-        
+
             isDisposed = true;
         }
 
