@@ -39,7 +39,7 @@ namespace VPKSoft.DropOutStack
     /// <seealso cref="System.Collections.Generic.IEnumerable{T}" />
     /// <seealso cref="System.Collections.Generic.IEnumerator{T}" />
     [Serializable]
-    public class DropOutStack<T> : IEnumerable<T>, IEnumerator<T>
+    public class DropOutStack<T> : Stack<T>, IEnumerable<T>, IEnumerator<T>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="DropOutStack{T}"/> class.
@@ -108,7 +108,7 @@ namespace VPKSoft.DropOutStack
         ///Gets the number of elements contained in the <see cref="DropOutStack{T}"/>.
         /// </summary>
         /// <value>The number of elements contained in the <see cref="DropOutStack{T}"/>.</value>
-        public int Count { get; private set; }
+        public new int Count { get; private set; }
         #endregion
 
         #region StackMethods
@@ -116,7 +116,7 @@ namespace VPKSoft.DropOutStack
         /// Removes all objects from the <see cref="DropOutStack{T}"/>.
         /// </summary>
         // ReSharper disable once UnusedMember.Global
-        public void Clear()
+        public new void Clear()
         {
             Capacity = Capacity;
         }
@@ -127,7 +127,7 @@ namespace VPKSoft.DropOutStack
         /// <returns>The object at the top of the <see cref="DropOutStack{T}"/>.</returns>
         /// <exception cref="InvalidOperationException">The <see cref="DropOutStack{T}"/> is empty.</exception>
         // ReSharper disable once UnusedMember.Global
-        public T Peek()
+        public new T Peek()
         {
             if (Count > 0)
             {
@@ -143,7 +143,7 @@ namespace VPKSoft.DropOutStack
         /// <returns>The object removed from the top of the <see cref="DropOutStack{T}"/>.</returns>
         /// <exception cref="InvalidOperationException">The <see cref="DropOutStack{T}"/> is empty.</exception>
         // ReSharper disable once UnusedMember.Global
-        public T Pop()
+        public new T Pop()
         {
             if (Count > 0)
             {
@@ -162,7 +162,7 @@ namespace VPKSoft.DropOutStack
         /// Inserts an object at the top of the <see cref="DropOutStack{T}"/>.
         /// </summary>
         /// <param name="item">The object to push onto the <see cref="DropOutStack{T}"/>. The value can be null for reference types.</param>
-        public void Push(T item)
+        public new void Push(T item)
         {
             //Buffer.BlockCopy(items, 0, items, 1, capacity - 1);
 
@@ -182,7 +182,7 @@ namespace VPKSoft.DropOutStack
         /// </summary>
         /// <returns>A new array containing copies of the elements of the <see cref="DropOutStack{T}"/>.</returns>
         // ReSharper disable once UnusedMember.Global
-        public T[] ToArray()
+        public new T[] ToArray()
         {
             var result = new T[Count];
 
@@ -204,7 +204,7 @@ namespace VPKSoft.DropOutStack
         /// Returns an enumerator that iterates through the collection.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the collection.</returns>
-        public IEnumerator<T> GetEnumerator()
+        public new IEnumerator<T> GetEnumerator()
         {
             for (int i = cursor; i < cursor + Count; i++)
             {
