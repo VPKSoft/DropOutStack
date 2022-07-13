@@ -75,7 +75,7 @@ namespace VPKSoft.DropOutStack
             {
                 if (index < 0 || index >= Count)
                 {
-                    // throw new ArgumentOutOfRangeException(nameof(index), @"The index is out of range.");
+                    throw new ArgumentOutOfRangeException(nameof(index), @"The index is out of range.");
                 }
 
                 return items[(Count - index + cursor - 1) % Count];
